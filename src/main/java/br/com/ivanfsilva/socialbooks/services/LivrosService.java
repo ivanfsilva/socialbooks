@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
 import br.com.ivanfsilva.socialbooks.domain.Comentario;
 import br.com.ivanfsilva.socialbooks.domain.Livro;
 import br.com.ivanfsilva.socialbooks.repository.ComentariosRepository;
@@ -66,6 +65,11 @@ public class LivrosService {
 		comentario.setData(new Date());
 		
 		return comentariosRepository.save(comentario);
+	}
+	
+	public List<Comentario> listarComentarios(Long livroId) {
+		Livro livro = buscar(livroId);
 		
+		return livro.getComentarios();
 	}
 }
