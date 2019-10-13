@@ -1,12 +1,15 @@
 package br.com.ivanfsilva.socialbooks.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import br.com.ivanfsilva.socialbooks.domain.Comentario;
 import br.com.ivanfsilva.socialbooks.domain.Livro;
+import br.com.ivanfsilva.socialbooks.repository.ComentariosRepository;
 import br.com.ivanfsilva.socialbooks.repository.LivrosRepository;
 import br.com.ivanfsilva.socialbooks.services.exceptions.LivroNaoEncontradoException;
 
@@ -15,6 +18,9 @@ public class LivrosService {
 
 	@Autowired
 	private LivrosRepository livrosRepository;
+	
+	@Autowired
+	private ComentariosRepository comentariosRepository;
 	
 	public List<Livro> listar() {
 		return livrosRepository.findAll();
@@ -51,5 +57,15 @@ public class LivrosService {
 	
 	private void verificarExistencia(Livro livro) {
 		buscar(livro.getId());
+	}
+	
+	public Comentario salvarComentario(Long livroId, Comentario comentario) {
+		Livro livro = buscar(livroId);
+		
+		comentario.setLivro(livro);
+		comentario.setData(new Date());
+		
+		return comentariosRepository.save(comentario);
+		
 	}
 }
