@@ -2,7 +2,7 @@ package br.com.ivanfsilva.socialbooks.services.exceptions;
 
 public class LivroNaoEncontradoException extends RuntimeException {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1869300553614629710L;
 
 	public LivroNaoEncontradoException(String mensagem) {
 		super(mensagem);
